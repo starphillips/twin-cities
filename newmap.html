@@ -1,0 +1,102 @@
+<html>
+<head>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="something" />
+    <link rel="stylesheet" href="style.css" />
+
+
+    <h1>TWIN CITIES</h1>
+
+
+
+    <section id="navigation">
+            <nav>
+                <ul>
+                    <li><a href="newmap.html">Plymouth, UK</a></li>
+                    <li><a href="plymouthusa.html">Plymouth, USA</a></li>
+                    <li><a href="brest.html">Brest, France</a></li>
+                    <li><a href="gdynia.html">Gdynia, Poland</a></li>
+                </ul>
+            </nav>
+    </section>
+</head>
+
+
+
+<body>
+
+    <div id="map"></div>
+    <div id="weather-box">Loading weather...</div> <!-- Weather Box -->
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic3RhcnBoaWxsaXBzIiwiYSI6ImNtM2VyazR0ZzBoOWoya3F1Y3Jyem5zYmQifQ.r1-fDlr0GczXtOBDk6EfbA';
+
+        const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        zoom: 10 // We'll set the center dynamically
+    });
+
+    // Fetch coordinates from PHP
+    fetch('fetch_city_data.php')
+        .then(response => response.json())
+        .then(cities => {
+            if (cities.length > 0) {
+                // Set the map center to the first city's coordinates
+                map.setCenter([cities[0].longitude, cities[0].latitude]);
+
+            } else {
+                console.error("No cities found in the database.");
+            }
+        })
+        .catch(error => console.error("Error fetching coordinates:", error));
+
+
+        // OpenWeather API for 5-day forecast
+        const apiEndpoint = "https://api.openweathermap.org/data/2.5/forecast?lat=50.3755&lon=-4.1427&appid=a9f061728c167352b662205ef1f50e26";
+
+        fetch(apiEndpoint)
+            .then(response => response.json())
+            .then(data => {
+                const { city, list } = data;
+
+                // Display the city name
+                let weatherContent = `<h3>Weather in ${city.name}</h3>`;
+
+                // Group forecasts by day
+                const dailyForecasts = {};
+                list.forEach(entry => {
+                    const date = new Date(entry.dt * 1000).toISOString().split('T')[0]; // Extract date in YYYY-MM-DD format
+                    if (!dailyForecasts[date]) {
+                        dailyForecasts[date] = entry; // Keep only the first entry for the day
+                    }
+                });
+
+                // Extract up to 5 days of forecasts
+                const forecastDays = Object.values(dailyForecasts).slice(0, 5);
+
+                weatherContent += '<div class="forecast"><h4>5-Day Forecast:</h4>';
+                forecastDays.forEach(entry => {
+                    const date = new Date(entry.dt * 1000).toLocaleDateString('en-GB', { weekday: 'long', month: 'short', day: 'numeric' });
+                    const temp = (entry.main.temp - 273.15).toFixed(2); // Convert Kelvin to Celsius
+                    const description = entry.weather[0].description;
+
+                    weatherContent += `
+                        <div class="forecast-entry">
+                            <p><strong>${date}:</strong> ${temp} °C, ${description}</p>
+                        </div>
+                    `;
+                });
+
+                weatherContent += '</div>';
+
+                // Update the weather box
+                document.getElementById("weather-box").innerHTML = weatherContent;
+            })
+            .catch(error => {
+                document.getElementById("weather-box").innerHTML = `<p>Error fetching weather data</p>`;
+                console.error("Error fetching weather data:", error);
+            });
+    </script>
+</body>
+</html>
