@@ -36,7 +36,7 @@ if ($conn->connect_error) {
 
 // Fetch cities from the database
 $cities = [];
-$city_query = "SELECT cityID, cityName, cityCountry, Latitude, Longitude FROM city";
+$city_query = "SELECT cityID, cityName, cityCountry, Latitude, Longitude, Population, Currency, funFact FROM city";
 $city_result = $conn->query($city_query);
 
 while ($city = $city_result->fetch_assoc()) {
@@ -45,18 +45,32 @@ while ($city = $city_result->fetch_assoc()) {
         "name" => "{$city['cityName']}, {$city['cityCountry']}",
         "lat" => $city['Latitude'],
         "lon" => $city['Longitude'],
+        "population" => $city['Population'],
+        "currency" => $city['Currency'],
+        "funFact" => $city['funFact'],
         "points_of_interest" => []
     ];
 
-    // Fetch points of interest for this city
-    $poi_query = "SELECT PlaceName, Latitude, Longitude FROM placeofinterest WHERE cityID = $cityID";
+    // Fetch points of interest for this city with detailed information
+    $poi_query = "SELECT poi.PlaceName, poi.Latitude, poi.Longitude, poi.PlaceType, poi.Capacity, poi.YearEstablished, poi.HoursOfOperation
+                  FROM placeofinterest poi
+                  WHERE poi.cityID = $cityID";
+
     $poi_result = $conn->query($poi_query);
 
     while ($poi = $poi_result->fetch_assoc()) {
+        // Fetch the Flickr image URL for this point of interest
+        $imageUrl = fetchFlickrImage($poi['PlaceName'], $_ENV['flickr_api_key']);
+
         $cities[$cityID]["points_of_interest"][] = [
             "name" => $poi['PlaceName'],
             "lat" => $poi['Latitude'],
-            "lon" => $poi['Longitude']
+            "lon" => $poi['Longitude'],
+            "image_url" => $imageUrl, // Store the image URL here
+            "place_type" => $poi['PlaceType'],
+            "capacity" => $poi['Capacity'],
+            "year_established" => $poi['YearEstablished'],
+            "hours_of_operation" => $poi['HoursOfOperation']
         ];
     }
 }
@@ -74,6 +88,27 @@ $cityDataJSON = json_encode($cityData);
 
 $mapToken = $_ENV['map_token'] ?? null;
 $weatherToken = $_ENV['weather_token'] ?? null;
+
+// Function to fetch image URL from Flickr
+function fetchFlickrImage($placeName, $flickrApiKey) {
+    // Use the name of the place as the search term
+    $searchTerm = urlencode($placeName);
+    $url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={$flickrApiKey}&text={$searchTerm}&format=json&nojsoncallback=1&per_page=1";
+
+    // Fetch and decode the JSON response
+    $response = file_get_contents($url);
+    $data = json_decode($response, true);
+
+    // Check if any photos are returned
+    if (isset($data['photos']['photo'][0])) {
+        $photo = $data['photos']['photo'][0];
+        $photoUrl = "https://farm{$photo['farm']}.staticflickr.com/{$photo['server']}/{$photo['id']}_{$photo['secret']}_b.jpg";
+        return $photoUrl;
+    }
+
+    // Return a default image if no photo is found
+    return 'path/to/default/image.jpg'; // Replace with your default city image URL
+}
 ?>
 
 <html>
@@ -101,11 +136,33 @@ $weatherToken = $_ENV['weather_token'] ?? null;
 
 <div id="map"></div>
 <div id="weather-box">Loading weather...</div>
-<div id="poi-box"><h3>Points of Interest</h3><ul id="poi-list"></ul></div>
+
+<div>
+    <p><strong>Population:</strong> <?php echo $cityData['population']; ?></p>
+    <p><strong>Currency:</strong> <?php echo $cityData['currency']; ?></p>
+    <p><strong>Fun Fact:</strong> <?php echo $cityData['funFact']; ?></p>
+</div>
+
+<!-- Container to display detailed information about the selected POI -->
+<div id="poi-details">
+    <h3>Details:</h3>
+    <p><strong>Place Type:</strong> <span id="poi-place-type"></span></p>
+    <p><strong>Capacity:</strong> <span id="poi-capacity"></span></p>
+    <p><strong>Year Established:</strong> <span id="poi-year-established"></span></p>
+    <p><strong>Hours of Operation:</strong> <span id="poi-hours-of-operation"></span></p>
+</div>
 
 <script>
     const cityData = <?php echo $cityDataJSON; ?>;
     const weatherToken = '<?php echo $weatherToken; ?>';
+
+    // Function to display detailed information when a POI is clicked
+    function displayPoiDetails(poi) {
+        document.getElementById("poi-place-type").textContent = poi.place_type;
+        document.getElementById("poi-capacity").textContent = poi.capacity;
+        document.getElementById("poi-year-established").textContent = poi.year_established;
+        document.getElementById("poi-hours-of-operation").textContent = poi.hours_of_operation;
+    }
 
     mapboxgl.accessToken = '<?php echo $mapToken; ?>';
     const map = new mapboxgl.Map({
@@ -121,16 +178,19 @@ $weatherToken = $_ENV['weather_token'] ?? null;
         .addTo(map);
 
     cityData.points_of_interest.forEach(poi => {
-        new mapboxgl.Marker({ color: 'red' })
-            .setLngLat([poi.lon, poi.lat])
-            .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(poi.name))
-            .addTo(map);
+    const marker = new mapboxgl.Marker({ color: 'red' })
+        .setLngLat([poi.lon, poi.lat])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(
+            `<h4>${poi.name}</h4>
+            <img src="${poi.image_url}" alt="${poi.name}" style="width: 100%;"/>`
+        ))
+        .addTo(map);
 
-        const poiList = document.getElementById("poi-list");
-        const li = document.createElement("li");
-        li.textContent = poi.name;
-        poiList.appendChild(li);
+    // Add click event to update POI details section
+    marker.getElement().addEventListener('click', () => {
+        displayPoiDetails(poi);
     });
+});
 
     const apiEndpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityData.lat}&lon=${cityData.lon}&appid=${weatherToken}`;
     fetch(apiEndpoint)
