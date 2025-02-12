@@ -51,7 +51,7 @@ while ($city = $city_result->fetch_assoc()) {
         "points_of_interest" => []
     ];
 
-    // Fetch points of interest for this city with detailed information
+    // Fetch points of interest for this city
     $poi_query = "SELECT poi.PlaceName, poi.Latitude, poi.Longitude, poi.PlaceType, poi.Capacity, poi.YearEstablished, poi.HoursOfOperation
                   FROM placeofinterest poi
                   WHERE poi.cityID = $cityID";
@@ -59,14 +59,10 @@ while ($city = $city_result->fetch_assoc()) {
     $poi_result = $conn->query($poi_query);
 
     while ($poi = $poi_result->fetch_assoc()) {
-        // Fetch the Flickr image URL for this point of interest
-        $imageUrl = fetchFlickrImage($poi['PlaceName'], $_ENV['flickr_api_key']);
-
         $cities[$cityID]["points_of_interest"][] = [
             "name" => $poi['PlaceName'],
             "lat" => $poi['Latitude'],
             "lon" => $poi['Longitude'],
-            "image_url" => $imageUrl, // Store the image URL here
             "place_type" => $poi['PlaceType'],
             "capacity" => $poi['Capacity'],
             "year_established" => $poi['YearEstablished'],
@@ -88,27 +84,6 @@ $cityDataJSON = json_encode($cityData);
 
 $mapToken = $_ENV['map_token'] ?? null;
 $weatherToken = $_ENV['weather_token'] ?? null;
-
-// Function to fetch image URL from Flickr
-function fetchFlickrImage($placeName, $flickrApiKey) {
-    // Use the name of the place as the search term
-    $searchTerm = urlencode($placeName);
-    $url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={$flickrApiKey}&text={$searchTerm}&format=json&nojsoncallback=1&per_page=1";
-
-    // Fetch and decode the JSON response
-    $response = file_get_contents($url);
-    $data = json_decode($response, true);
-
-    // Check if any photos are returned
-    if (isset($data['photos']['photo'][0])) {
-        $photo = $data['photos']['photo'][0];
-        $photoUrl = "https://farm{$photo['farm']}.staticflickr.com/{$photo['server']}/{$photo['id']}_{$photo['secret']}_b.jpg";
-        return $photoUrl;
-    }
-
-    // Return a default image if no photo is found
-    return 'path/to/default/image.jpg'; // Replace with your default city image URL
-}
 ?>
 
 <html>
@@ -143,7 +118,7 @@ function fetchFlickrImage($placeName, $flickrApiKey) {
     <p><strong>Fun Fact:</strong> <?php echo $cityData['funFact']; ?></p>
 </div>
 
-<!-- Container to display detailed information about the selected POI -->
+<!-- Container for POI details -->
 <div id="poi-details">
     <h3>Details:</h3>
     <p><strong>Place Type:</strong> <span id="poi-place-type"></span></p>
@@ -152,17 +127,40 @@ function fetchFlickrImage($placeName, $flickrApiKey) {
     <p><strong>Hours of Operation:</strong> <span id="poi-hours-of-operation"></span></p>
 </div>
 
+<!-- Placeholder for the image, which loads dynamically -->
+<div id="poi-image-box" style="width: 300px; height: 200px; border: 1px solid #ddd; display: inline-block; margin-left: 20px;">
+    <img id="poi-image" src="path/to/placeholder-image.jpg" alt="Place of interest image" style="width: 100%; height: 100%; object-fit: cover;" />
+</div>
+
 <script>
     const cityData = <?php echo $cityDataJSON; ?>;
     const weatherToken = '<?php echo $weatherToken; ?>';
 
-    // Function to display detailed information when a POI is clicked
+    function fetchCityImage(cityName) {
+        const cityImage = document.getElementById("poi-image");
+        cityImage.src = "path/to/loading-spinner.gif"; 
+
+        fetch(`fetch_image.php?place=${encodeURIComponent(cityName)}`)
+            .then(response => response.json())
+            .then(data => {
+                cityImage.src = data.image_url;
+            })
+            .catch(() => {
+                cityImage.src = "path/to/default/image.jpg"; 
+            });
+    }
+
     function displayPoiDetails(poi) {
         document.getElementById("poi-place-type").textContent = poi.place_type;
         document.getElementById("poi-capacity").textContent = poi.capacity;
         document.getElementById("poi-year-established").textContent = poi.year_established;
         document.getElementById("poi-hours-of-operation").textContent = poi.hours_of_operation;
+
+        fetchCityImage(poi.name); 
     }
+
+    // Load city image on page load
+    fetchCityImage(cityData.name);
 
     mapboxgl.accessToken = '<?php echo $mapToken; ?>';
     const map = new mapboxgl.Map({
@@ -178,20 +176,17 @@ function fetchFlickrImage($placeName, $flickrApiKey) {
         .addTo(map);
 
     cityData.points_of_interest.forEach(poi => {
-    const marker = new mapboxgl.Marker({ color: 'red' })
-        .setLngLat([poi.lon, poi.lat])
-        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(
-            `<h4>${poi.name}</h4>
-            <img src="${poi.image_url}" alt="${poi.name}" style="width: 100%;"/>`
-        ))
-        .addTo(map);
+        const marker = new mapboxgl.Marker({ color: 'red' })
+            .setLngLat([poi.lon, poi.lat])
+            .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<h4>${poi.name}</h4>`))
+            .addTo(map);
 
-    // Add click event to update POI details section
-    marker.getElement().addEventListener('click', () => {
-        displayPoiDetails(poi);
+        marker.getElement().addEventListener('click', () => {
+            displayPoiDetails(poi);
+        });
     });
-});
 
+    // Fetch weather data
     const apiEndpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityData.lat}&lon=${cityData.lon}&appid=${weatherToken}`;
     fetch(apiEndpoint)
         .then(response => response.json())
@@ -208,20 +203,22 @@ function fetchFlickrImage($placeName, $flickrApiKey) {
             });
 
             Object.values(dailyForecasts).slice(0, 5).forEach(entry => {
-                const date = new Date(entry.dt * 1000).toLocaleDateString('en-GB', { weekday: 'long', month: 'short', day: 'numeric' });
+                const date = new Date(entry.dt * 1000).toLocaleDateString('en-GB', { 
+                    weekday: 'long', month: 'short', day: 'numeric' 
+                });
                 const temp = (entry.main.temp - 273.15).toFixed(2);
                 const description = entry.weather[0].description;
-                weatherContent += `<div class="forecast-entry"><p><strong>${date}:</strong> ${temp} °C, ${description}</p></div>`;
+                weatherContent += `<div class="forecast-entry">
+                    <p><strong>${date}:</strong> ${temp} °C, ${description}</p>
+                </div>`;
             });
 
             weatherContent += '</div>';
             document.getElementById("weather-box").innerHTML = weatherContent;
         })
-        .catch(error => {
-            document.getElementById("weather-box").innerHTML = `<p>Error fetching weather data</p>`;
-            console.error("Error fetching weather data:", error);
-        });
+        .catch(() => document.getElementById("weather-box").innerHTML = `<p>Error fetching weather data</p>`);
 </script>
+
 
 </body>
 </html>
