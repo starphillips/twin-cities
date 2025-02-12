@@ -120,7 +120,7 @@ $weatherToken = $_ENV['weather_token'] ?? null;
 
 <!-- Container for POI details -->
 <div id="poi-details">
-    <h3>Details:</h3>
+    <h3>Place of Interest Details:</h3>
     <p><strong>Place Type:</strong> <span id="poi-place-type"></span></p>
     <p><strong>Capacity:</strong> <span id="poi-capacity"></span></p>
     <p><strong>Year Established:</strong> <span id="poi-year-established"></span></p>
@@ -183,6 +183,8 @@ $weatherToken = $_ENV['weather_token'] ?? null;
 
         marker.getElement().addEventListener('click', () => {
             displayPoiDetails(poi);
+
+        
         });
     });
 
