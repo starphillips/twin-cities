@@ -100,14 +100,17 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
     <h1>TWIN CITIES</h1>
 
     <section id="navigation">
-        <nav>
-            <ul>
-                <?php foreach ($cities as $id => $city): ?>
-                    <li><a href="?city=<?php echo $id; ?>"><?php echo $city['name']; ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </nav>
-    </section>
+    <nav>
+        <ul>
+            <?php
+            // Loop through each city and create a list item with a link
+            foreach ($cities as $id => $city) {
+                echo '<li><a href="?city=' . $id . '">' . $city['name'] . '</a></li>'; // Echo is used to output data to the screen
+            }
+            ?>
+        </ul>
+    </nav>
+</section>
 </head>
 
 <body>
@@ -143,7 +146,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
 
     function fetchCityImage(cityName) {
         const cityImage = document.getElementById("poi-image");
-        cityImage.src = "path/to/loading-spinner.gif"; 
+        cityImage.src = "./spinner.gif"; 
 
         fetch(`fetch_image.php?place=${encodeURIComponent(cityName)}`)
             .then(response => response.json())
@@ -151,7 +154,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
                 cityImage.src = data.image_url;
             })
             .catch(() => {
-                cityImage.src = "path/to/default/image.jpg"; 
+                cityImage.src = "./default.jpg";
             });
     }
 
