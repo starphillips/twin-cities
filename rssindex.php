@@ -74,10 +74,15 @@ while ($city = $city_result->fetch_assoc()) {
 $conn->close();
 
 // Get selected city
-$selectedCity = $_GET['city'] ?? array_key_first($cities);
-if (!isset($cities[$selectedCity])) {
-    $selectedCity = array_key_first($cities);
+if (isset($_GET['city'])) {
+    $selectedCity = $_GET['city'];
+} else {
+    $selectedCity = array_key_first($cities);  // Default to the first city
 }
+
+if (!isset($cities[$selectedCity])) {
+    $selectedCity = array_key_first($cities);  // Ensure the city exists
+} 
 
 $cityData = $cities[$selectedCity];
 $cityDataJSON = json_encode($cityData);
