@@ -87,8 +87,8 @@ if (!isset($cities[$selectedCity])) {
 $cityData = $cities[$selectedCity];
 $cityDataJSON = json_encode($cityData);
 
-$mapToken = $_ENV['map_token'] ?? null;
-$weatherToken = $_ENV['weather_token'] ?? null;
+$mapToken = isset($_ENV['map_token']) ? $_ENV['map_token'] : null;
+$weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null; 
 ?>
 
 <html>
