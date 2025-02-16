@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
+  <channel>
+    <title>Twin Cities RSS Feed</title>
+    <link>http://localhost/twincities/rss_feed.php</link>
+    <description>Latest city and place updates</description>
+    <item>
+      <title>Plymouth, UK</title>
+      <description>Population: 262100, Currency: GBP, Fun Fact: Known for its historic Mayflower steps.</description>
+      <geo:lat>50.3755</geo:lat>
+      <geo:long>-4.142</geo:long>
+      <link>http://localhost/twincities/city.php?cityID=1</link>
+    </item>
+    <item>
+      <title>Mayflower Steps - Plymouth</title>
+      <description>Type: Historical Site, Capacity: 500, Established: 1620, Hours: 9:00 AM - 5:00 PM</description>
+      <geo:lat>50.3663</geo:lat>
+      <geo:long>-4.1338</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Mayflower+Steps</link>
+    </item>
+    <item>
+      <title>Royal Citadel - Plymouth</title>
+      <description>Type: Fortress, Capacity: 2000, Established: 1666, Hours: 9:00 AM - 6:00 PM</description>
+      <geo:lat>50.365</geo:lat>
+      <geo:long>-4.13738</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Royal+Citadel</link>
+    </item>
+    <item>
+      <title>National Marine Aquarium - Plymouth</title>
+      <description>Type: Aquarium, Capacity: 4000, Established: 1998, Hours: 10:00 AM - 5:00 PM</description>
+      <geo:lat>50.3669</geo:lat>
+      <geo:long>-4.13098</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=National+Marine+Aquarium</link>
+    </item>
+    <item>
+      <title>Plymouth Hoe - Plymouth</title>
+      <description>Type: Park, Capacity: 5000, Established: 1600, Hours: Open 24 Hours</description>
+      <geo:lat>50.3659</geo:lat>
+      <geo:long>-4.14229</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Plymouth+Hoe</link>
+    </item>
+    <item>
+      <title>The Box - Plymouth</title>
+      <description>Type: Museum, Capacity: 1500, Established: 2020, Hours: 10:00 AM - 5:00 PM</description>
+      <geo:lat>50.3746</geo:lat>
+      <geo:long>-4.13747</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=The+Box</link>
+    </item>
+    <item>
+      <title>Smeaton's Tower - Plymouth</title>
+      <description>Type: Lighthouse, Capacity: 100, Established: 1759, Hours: 9:30 AM - 4:30 PM</description>
+      <geo:lat>50.3645</geo:lat>
+      <geo:long>-4.14188</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Smeaton%27s+Tower</link>
+    </item>
+    <item>
+      <title>Drake Circus - Plymouth</title>
+      <description>Type: Shopping Mall, Capacity: 10000, Established: 2006, Hours: 9:00 AM - 7:00 PM</description>
+      <geo:lat>50.3725</geo:lat>
+      <geo:long>-4.13854</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Drake+Circus</link>
+    </item>
+    <item>
+      <title>Barbican Theatre - Plymouth</title>
+      <description>Type: Theatre, Capacity: 140, Established: 1980, Hours: 7:00 PM - 10:00 PM</description>
+      <geo:lat>50.3663</geo:lat>
+      <geo:long>-4.13447</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Barbican+Theatre</link>
+    </item>
+    <item>
+      <title>Plymouth, USA</title>
+      <description>Population: 58600, Currency: USD, Fun Fact: Famous for Plymouth Rock, symbolizing the arrival of the Pilgrims.</description>
+      <geo:lat>41.9584</geo:lat>
+      <geo:long>-70.6673</geo:long>
+      <link>http://localhost/twincities/city.php?cityID=2</link>
+    </item>
+    <item>
+      <title>Plymouth Rock - Plymouth</title>
+      <description>Type: Historical Site, Capacity: 200, Established: 1620, Hours: Open 24 Hours</description>
+      <geo:lat>41.9582</geo:lat>
+      <geo:long>-70.6621</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Plymouth+Rock</link>
+    </item>
+    <item>
+      <title>Pilgrim Hall Museum - Plymouth</title>
+      <description>Type: Museum, Capacity: 500, Established: 1824, Hours: 9:30 AM - 4:30 PM</description>
+      <geo:lat>41.9592</geo:lat>
+      <geo:long>-70.6681</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Pilgrim+Hall+Museum</link>
+    </item>
+    <item>
+      <title>Plimoth Patuxet Museums - Plymouth</title>
+      <description>Type: Living History Museum, Capacity: 1000, Established: 1947, Hours: 9:00 AM - 5:00 PM</description>
+      <geo:lat>41.9383</geo:lat>
+      <geo:long>-70.6254</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Plimoth+Patuxet+Museums</link>
+    </item>
+    <item>
+      <title>Myles Standish State Forest - Plymouth</title>
+      <description>Type: Park, Capacity: 10000, Established: 1921, Hours: 8:00 AM - Sunset</description>
+      <geo:lat>41.8629</geo:lat>
+      <geo:long>-70.6727</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Myles+Standish+State+Forest</link>
+    </item>
+    <item>
+      <title>Mayflower II - Plymouth</title>
+      <description>Type: Ship, Capacity: 50, Established: 1957, Hours: 9:00 AM - 5:00 PM</description>
+      <geo:lat>41.96</geo:lat>
+      <geo:long>-70.6621</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Mayflower+II</link>
+    </item>
+    <item>
+      <title>Edaville Family Theme Park - Plymouth</title>
+      <description>Type: Amusement Park, Capacity: 2000, Established: 1947, Hours: 10:00 AM - 8:00 PM</description>
+      <geo:lat>41.8483</geo:lat>
+      <geo:long>-70.7728</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Edaville+Family+Theme+Park</link>
+    </item>
+    <item>
+      <title>Jenney Interpretive Centre - Plymouth</title>
+      <description>Type: Cultural Center, Capacity: 200, Established: 2001, Hours: 9:00 AM - 4:00 PM</description>
+      <geo:lat>41.9541</geo:lat>
+      <geo:long>-70.6654</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Jenney+Interpretive+Centre</link>
+    </item>
+    <item>
+      <title>Plymouth Long Beach - Plymouth</title>
+      <description>Type: Beach, Capacity: 5000, Established: 1900, Hours: Open 24 Hours</description>
+      <geo:lat>41.9424</geo:lat>
+      <geo:long>-70.6226</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Plymouth+Long+Beach</link>
+    </item>
+    <item>
+      <title>Brest, France</title>
+      <description>Population: 140000, Currency: EUR, Fun Fact: Home to one of the most important naval bases in France.</description>
+      <geo:lat>48.3904</geo:lat>
+      <geo:long>-4.4861</geo:long>
+      <link>http://localhost/twincities/city.php?cityID=3</link>
+    </item>
+    <item>
+      <title>Brest Castle - Brest</title>
+      <description>Type: Historical Site, Capacity: 2000, Established: 1240, Hours: 10:00 AM - 6:00 PM</description>
+      <geo:lat>48.3812</geo:lat>
+      <geo:long>-4.49465</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Brest+Castle</link>
+    </item>
+    <item>
+      <title>Oceanopolis - Brest</title>
+      <description>Type: Aquarium, Capacity: 3000, Established: 1990, Hours: 9:30 AM - 5:30 PM</description>
+      <geo:lat>48.3902</geo:lat>
+      <geo:long>-4.43605</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Oceanopolis</link>
+    </item>
+    <item>
+      <title>Tour Tanguy - Brest</title>
+      <description>Type: Museum, Capacity: 300, Established: 1300, Hours: 10:00 AM - 6:00 PM</description>
+      <geo:lat>48.3835</geo:lat>
+      <geo:long>-4.49706</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Tour+Tanguy</link>
+    </item>
+    <item>
+      <title>Brest Arsenal - Brest</title>
+      <description>Type: Naval Base, Capacity: 5000, Established: 1680, Hours: Restricted Access</description>
+      <geo:lat>48.381</geo:lat>
+      <geo:long>-4.50455</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Brest+Arsenal</link>
+    </item>
+    <item>
+      <title>Jardin des Explorateurs - Brest</title>
+      <description>Type: Garden, Capacity: 500, Established: 1700, Hours: 8:00 AM - 8:00 PM</description>
+      <geo:lat>48.391</geo:lat>
+      <geo:long>-4.491</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Jardin+des+Explorateurs</link>
+    </item>
+    <item>
+      <title>Rue de Siam - Brest</title>
+      <description>Type: Shopping Street, Capacity: 5000, Established: 1800, Hours: Open 24 Hours</description>
+      <geo:lat>48.392</geo:lat>
+      <geo:long>-4.487</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Rue+de+Siam</link>
+    </item>
+    <item>
+      <title>Brest Arena - Brest</title>
+      <description>Type: Arena, Capacity: 6000, Established: 2014, Hours: 10:00 AM - 11:00 PM</description>
+      <geo:lat>48.388</geo:lat>
+      <geo:long>-4.4665</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Brest+Arena</link>
+    </item>
+    <item>
+      <title>Conservatoire Botanique - Brest</title>
+      <description>Type: Botanical Garden, Capacity: 2000, Established: 1975, Hours: 9:30 AM - 6:00 PM</description>
+      <geo:lat>48.403</geo:lat>
+      <geo:long>-4.44835</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Conservatoire+Botanique</link>
+    </item>
+    <item>
+      <title>Gdynia, Poland</title>
+      <description>Population: 246000, Currency: PLN, Fun Fact: Known for its modernist architecture and Sea Towers.</description>
+      <geo:lat>54.5189</geo:lat>
+      <geo:long>18.5305</geo:long>
+      <link>http://localhost/twincities/city.php?cityID=4</link>
+    </item>
+    <item>
+      <title>Kosciuszko Square - Gdynia</title>
+      <description>Type: Historical Site, Capacity: 5000, Established: 1928, Hours: Open 24 Hours</description>
+      <geo:lat>54.5194</geo:lat>
+      <geo:long>18.5443</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Kosciuszko+Square</link>
+    </item>
+    <item>
+      <title>Gdynia Aquarium - Gdynia</title>
+      <description>Type: Aquarium, Capacity: 2000, Established: 1971, Hours: 9:00 AM - 4:00 PM</description>
+      <geo:lat>54.5185</geo:lat>
+      <geo:long>18.5578</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Gdynia+Aquarium</link>
+    </item>
+    <item>
+      <title>Dar Pomorza - Gdynia</title>
+      <description>Type: Ship Museum, Capacity: 200, Established: 1909, Hours: 10:00 AM - 5:00 PM</description>
+      <geo:lat>54.5196</geo:lat>
+      <geo:long>18.5528</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Dar+Pomorza</link>
+    </item>
+    <item>
+      <title>Emigration Museum - Gdynia</title>
+      <description>Type: Museum, Capacity: 1000, Established: 2015, Hours: 10:00 AM - 6:00 PM</description>
+      <geo:lat>54.5332</geo:lat>
+      <geo:long>18.548</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Emigration+Museum</link>
+    </item>
+    <item>
+      <title>Orlowo Pier - Gdynia</title>
+      <description>Type: Pier, Capacity: 1000, Established: 1934, Hours: Open 24 Hours</description>
+      <geo:lat>54.4801</geo:lat>
+      <geo:long>18.5654</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Orlowo+Pier</link>
+    </item>
+    <item>
+      <title>Gdynia Film Centre - Gdynia</title>
+      <description>Type: Cinema, Capacity: 500, Established: 2015, Hours: 10:00 AM - 11:00 PM</description>
+      <geo:lat>54.5172</geo:lat>
+      <geo:long>18.5433</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Gdynia+Film+Centre</link>
+    </item>
+    <item>
+      <title>Batory Shopping Mall - Gdynia</title>
+      <description>Type: Shopping Mall, Capacity: 5000, Established: 1999, Hours: 9:00 AM - 9:00 PM</description>
+      <geo:lat>54.5192</geo:lat>
+      <geo:long>18.5395</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Batory+Shopping+Mall</link>
+    </item>
+    <item>
+      <title>Maria and Lech Kaczyński Park - Gdynia</title>
+      <description>Type: Park, Capacity: 1000, Established: 1950, Hours: Open 24 Hours</description>
+      <geo:lat>54.5147</geo:lat>
+      <geo:long>18.5433</geo:long>
+      <link>http://localhost/twincities/place.php?placeID=Maria+and+Lech+Kaczy%C5%84ski+Park</link>
+    </item>
+  </channel>
+</rss>
