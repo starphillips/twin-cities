@@ -32,3 +32,25 @@ UPDATE placesofinterest SET poi_url = 'https://en.wikipedia.org/wiki/Gdynia_Or%C
 UPDATE placesofinterest SET poi_url = 'https://hola.gdynia.pl/en/gdynia-film-center-hotel/' WHERE PlaceID = 30;
 UPDATE placesofinterest SET poi_url = 'https://www.inyourpocket.com/gdynia/batory-shopping-centre_16285v' WHERE PlaceID = 31;
 UPDATE placesofinterest SET poi_url = 'https://wanderlog.com/place/details/1838774/maria-and-lech-kaczyski-park' WHERE PlaceID = 32;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE comments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cityID INT NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    comment TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cityID) REFERENCES city(cityID)
+);
