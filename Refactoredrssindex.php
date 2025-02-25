@@ -218,6 +218,10 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
                             <table class="table-auto w-full">
                                 <tbody>
                                 <tr>
+                                    <td class="font-bold">Place Name:</td>
+                                    <td><span id="poi-name"></span></td>
+                                </tr>
+                                <tr>
                                     <td class="font-bold">Place Type:</td>
                                     <td><span id="poi-place-type"></span></td>
                                 </tr>
@@ -262,6 +266,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
     }
 
     function displayPoiDetails(poi) {
+        document.getElementById("poi-name").textContent = poi.name;
         document.getElementById("poi-place-type").textContent = poi.place_type;
         document.getElementById("poi-capacity").textContent = poi.capacity;
         document.getElementById("poi-year-established").textContent = poi.year_established;
@@ -271,6 +276,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
     }
 
     function hidePoiDetails() {
+        document.getElementById("poi-name").textContent = '';
         document.getElementById("poi-place-type").textContent = '';
         document.getElementById("poi-capacity").textContent = '';
         document.getElementById("poi-year-established").textContent = '';
