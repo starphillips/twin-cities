@@ -100,7 +100,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/002f6ecea1.js" crossorigin="anonymous"></script>
-    <title>City Explorer</title>
+    <title>Twin Cities</title>
 </head>
 
 <body class="text-white min-h-screen relative">
