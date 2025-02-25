@@ -112,11 +112,9 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
     <div class="absolute bottom-0 right-0 w-96 h-96 bg-yellow-300 rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
 </div>
 
-
 <!-- Header -->
 <header class="relative z-10 bg-transparent text-white p-4 text-center">
     <h1 class="text-7xl font-bold">TWIN CITIES</h1>
-
 </header>
 
 <!-- Navigation -->
@@ -130,16 +128,20 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
     </nav>
 </section>
 
-
+<!-- Currently Viewing Sign -->
     <main class="container mx-auto p-4">
         <h2 class="text-4xl font-semibold mb-4 text-center animate-bounce ">Currently Viewing: <?= $cityData['name'] ?></h2>
 
+        <!-- Map -->
         <div class="relative group h-96">
             <div class="absolute -inset-0.5 bg-white rounded-lg blur"></div>
             <div id="map" class="relative px-10 py-8 rounded-lg leading-none h-full w-full  "></div>
 
+            <!-- Setup for grid -->
         </div>
         <section class="p-4 py-20">
+
+            <!-- Weather -->
             <div class="w-full  mx-auto "> ">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     <div class="absolute -inset-0.5 bg-gradient-to-r from-transparent via-indigo-700 to-transparent  border-2 rounded-lg blur  relative group h-64">
@@ -157,6 +159,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
                         </section>
                     </div>
 
+                    <!-- Images -->
                     <div class=" absolute -inset-0.5 bg-gradient-to-r from-transparent via-indigo-700 to-transparent border-2 rounded-lg blur  relative group h-64">
                         <section class="relative px-10 py-8  rounded-lg  h-full flex flex-col justify-center">
                             <svg
@@ -171,6 +174,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
                         </section>
                     </div>
 
+                    <!-- City Details -->
                     <div class=" absolute -inset-0.5 bg-gradient-to-r from-transparent via-indigo-700 to-transparent border-2 rounded-lg blur  relative group h-64">
                         <div class=" rounded-lg blur opacity-75 "></div>
                         <section class="relative px-10 py-8 rounded-lg  h-full flex flex-col justify-center">
@@ -200,6 +204,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
                         </section>
                     </div>
 
+                    <!-- Place of interest Details -->
                     <div class=" absolute -inset-0.5 bg-gradient-to-r from-transparent via-indigo-700 to-transparent border-2 rounded-lg blur   relative group h-64">
                         <div class="absolute rounded-lg blur opacity-75"></div>
                         <section class="relative px-10 py-8 rounded-lg leading-none h-full flex flex-col justify-center">
@@ -344,9 +349,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
 </script>
 </body>
 
-
-
-
+<!-- Footer -->
 <footer class="relative z-10 bg-transparent ">
     <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
     <span class="text-sm text-white sm:text-center dark:text-gray-400">
