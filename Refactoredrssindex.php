@@ -247,6 +247,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
         </section>
     </main>
 </div>
+
 <script>
     const cityData = <?php echo $cityDataJSON; ?>;
     const weatherToken = '<?php echo $weatherToken; ?>';
@@ -296,13 +297,11 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
 
     new mapboxgl.Marker()
         .setLngLat([cityData.lon, cityData.lat])
-        .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(cityData.name))
         .addTo(map);
 
     cityData.points_of_interest.forEach(poi => {
         const marker = new mapboxgl.Marker({ color: 'red' })
             .setLngLat([poi.lon, poi.lat])
-            .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<h4>${poi.name}</h4>`))
             .addTo(map);
 
         marker.getElement().addEventListener('mouseenter', () => {
