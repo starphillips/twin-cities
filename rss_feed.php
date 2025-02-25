@@ -53,8 +53,6 @@ while ($city = $city_result->fetch_assoc()) {
     $long = $xml->createElement('geo:long', $city['Longitude']);
     $item->appendChild($lat);
     $item->appendChild($long);
-    
-    $item->appendChild($xml->createElement('link', "http://localhost/twincities/city.php?cityID={$city['cityID']}"));
 
     // Fetch places of interest for this city
     $place_query = "SELECT PlaceName, PlaceType, Capacity, Longitude, Latitude, YearEstablished, HoursOfOperation, poi_URL FROM placeofinterest WHERE cityID = ?";
@@ -76,7 +74,8 @@ while ($city = $city_result->fetch_assoc()) {
         $place_item->appendChild($place_lat);
         $place_item->appendChild($place_long);
         
-        $place_item->appendChild($xml->createElement('link', "http://localhost/twincities/place.php?placeID=" . urlencode($place['PlaceName'])));
+        $place_item->appendChild($xml->createElement('link', $place['poi_URL']));
+
     }
     $stmt->close();
 }
