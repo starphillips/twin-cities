@@ -54,6 +54,6 @@ if (isset($data['photos']['photo'][0])) {
 
     echo json_encode(["image_url" => "cached_images/" . basename($cacheFile)]);
 } else {
-    echo json_encode(["image_url" => "path/to/default/image.jpg"]);
+    echo json_encode(["image_url" => "./footerimgs/default.jpg"]);
 }
 ?>

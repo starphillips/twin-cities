@@ -397,10 +397,14 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
     <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
     <span class="text-sm text-white sm:text-center dark:text-gray-400">
       <a href="https://github.com/starphillips/twin-cities" class="hover:underline">
-            <img src="footerimgs/github-mark.png" alt="GitHub Logo" class="inline-block w-6 h-6 ">
+            <img sr="footerimgs/github-mark.png" alt="GitHub Logo" class="inline-block w-6 h-6 ">
           Github™</a>  Group Project
-
     </span>
+
+    <span class="text-sm text-white sm:text-center dark:text-gray-400">
+        <p><a href="rss_feed.php" target="_blank">Click to view our RSS Feed</a></p>
+    </span>
+
         <span class="flex flex-wrap items-center mt-3 text-sm font-medium text-white dark:text-gray-400 sm:mt-0">
       <span class="inline-block mt-2 sm:mt-0 mr-2">Eryk Szymanski | Star Phillips | Nick LeMasonry | Harrison Hamilton</span>
             <img src="footerimgs/logo.png" alt="UWE Logo" class="inline-block w-6 h-6 ">
