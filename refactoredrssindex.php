@@ -287,7 +287,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
 
     function fetchCityImage(cityName) {
         const cityImage = document.getElementById("poi-image");
-        cityImage.src = "./spinner.gif";
+        cityImage.src = "./footerimgs/spinner.gif";
 
         fetch(`fetch_image.php?place=${encodeURIComponent(cityName)}`)
             .then(response => response.json())
@@ -295,7 +295,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
                 cityImage.src = data.image_url;
             })
             .catch(() => {
-                cityImage.src = "./default.jpg";
+                cityImage.src = "./footerimgs/default.jpg";
             });
     }
 

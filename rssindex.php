@@ -133,6 +133,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
 <!-- Container for POI details - JavaScript will populate this based on when the user clicks on a POI -->
 <div id="poi-details">
     <h3>Place of Interest Details:</h3>
+    <p><strong>Place of Interest:</strong> <span id="poi-name"></span></p>
     <p><strong>Place Type:</strong> <span id="poi-place-type"></span></p>
     <p><strong>Capacity:</strong> <span id="poi-capacity"></span></p>
     <p><strong>Year Established:</strong> <span id="poi-year-established"></span></p>
@@ -150,7 +151,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
 
     function fetchCityImage(cityName) {
         const cityImage = document.getElementById("poi-image"); // Selects the ID for the image, so we can update the image with the POI image
-        cityImage.src = "./spinner.gif";
+        cityImage.src = "./footerimgs/spinner.gif";
 
         fetch(`fetch_image.php?place=${encodeURIComponent(cityName)}`) // Sends a request to fetch_image.php taking the city name so its for the correct one
             .then(response => response.json())
@@ -158,11 +159,12 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
                 cityImage.src = data.image_url;
             })
             .catch(() => {
-                cityImage.src = "./default.jpg"; // If it cannot connect to FlickrAPI, it will return a default image
+                cityImage.src = "./footerimgs/default.jpg"; // If it cannot connect to FlickrAPI, it will return a default image
             });
     }
 
     function displayPoiDetails(poi) {
+        document.getElementById("poi-name").textContent = poi.name;
         document.getElementById("poi-place-type").textContent = poi.place_type;
         document.getElementById("poi-capacity").textContent = poi.capacity;
         document.getElementById("poi-year-established").textContent = poi.year_established;
@@ -172,6 +174,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
     }
 
     function hidePoiDetails() { // After hover it will hide the POI details
+        document.getElementById("poi-name").textContent = '';
         document.getElementById("poi-place-type").textContent = '';
         document.getElementById("poi-capacity").textContent = '';
         document.getElementById("poi-year-established").textContent = '';
