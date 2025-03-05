@@ -326,10 +326,12 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
     mapboxgl.accessToken = '<?php echo $mapToken; ?>';
     const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'mapbox://styles/mapbox/satellite-streets-v12',
         center: [cityData.lon, cityData.lat],
         zoom: 12
     });
+    map.addControl(new mapboxgl.FullscreenControl());
+
 
     new mapboxgl.Marker()
         .setLngLat([cityData.lon, cityData.lat])
@@ -397,7 +399,7 @@ $weatherToken = isset($_ENV['weather_token']) ? $_ENV['weather_token'] : null;
     <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
     <span class="text-sm text-white sm:text-center dark:text-gray-400">
       <a href="https://github.com/starphillips/twin-cities" class="hover:underline">
-            <img sr="footerimgs/github-mark.png" alt="GitHub Logo" class="inline-block w-6 h-6 ">
+          <img src="footerimgs/github-mark.png" alt="GitHub Logo" class="inline-block w-6 h-6 ">
           Github™</a>  Group Project
     </span>
 
