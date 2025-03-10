@@ -18,16 +18,15 @@ function loadEnv($file) {
 }
 
 loadEnv(__DIR__ . '/.env');
-$flickrApiKey = $_ENV['flickr_api_key'] ?? null;
+if (isset($_ENV['flickr_api_key'])) {
+    $flickrApiKey = $_ENV['flickr_api_key'];
+} else {
+    $flickrApiKey = null;
+}
 
 $placeName = trim($_GET['place']);
 $cacheDir = __DIR__ . "/cached_images";
 $cacheFile = "$cacheDir/" . md5($placeName) . ".jpg";
-
-// Ensure cache directory exists
-if (!is_dir($cacheDir)) {
-    mkdir($cacheDir, 0755, true);
-}
 
 // If cached image exists, return it
 if (file_exists($cacheFile)) {
